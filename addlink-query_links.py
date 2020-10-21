@@ -8,8 +8,6 @@ from scripts.utils import normalise_title
 from scripts.utils import getPageDict,process_page
 import multiprocessing
 
-PATH_mwaddlink=""
-
 ## logging via json
 #https://github.com/bobbui/json-logging-python
 import json_logging, logging, sys
@@ -40,10 +38,16 @@ def main():
                         type = float,
                         help="threshold value for links to be recommended")
 
+    parser.add_argument("--source","-s",
+                        default="/home/mgerlach/REPOS/mwaddlink/",
+                        type = str,
+                        help="Location of the trained model")
+
     args = parser.parse_args()
     lang = args.lang.replace('wiki','')
     page_title = normalise_title(args.page)
     threshold = args.threshold
+    PATH_mwaddlink = args.source
 
     logger.info('Getting link recommendations for article %s in %swiki with link-threshold %s'%(page_title, lang,threshold))
     
