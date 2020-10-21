@@ -23,13 +23,15 @@ addlink-query_notebook.ipynb
 This allows you to inspect the recommendations in a notebook.
 
 **Notes**:
+- currently this works only on stat1008 in the analytics cluster as the underlying data from the trained model is available only locally there
+
 - we need set up a python virtual environment:
 ```bash
-virtualenv -p /usr/bin/python3 venv_query/
+virtualenv -p /usr/bin/python3 venv/
 source venv_query/bin/activate
-pip install -r requirements_query.txt
+pip install -r requirements.txt
 ```
-This contains only the packages required for querying the model and is thus lighter than the environment for training the model.
+This contains only the packages required for querying the model and is thus lighter than the environment for training the model (see below)
 
 - on the stat-machines, make sure you have the http-proxy set up https://wikitech.wikimedia.org/wiki/HTTP_proxy
 - you might have to install the following nltk-package manually: ```python -m nltk.downloader punkt```
@@ -51,7 +53,7 @@ You can run the pipeline for a given language (change the variable ```LANG```)
 ```bash
 virtualenv -p /usr/bin/python3 venv/
 source venv/bin/activate
-pip install -r requirements.txt
+pip install -r requirements_train.txt
 ```
 
 - some parts in the script rely on using the spark cluster using a specific conda-environment from a specific stat-machine (stat1008).
